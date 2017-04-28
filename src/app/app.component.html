@@ -1,3 +1,5 @@
-<app-search></app-search>
 
-<app-weather-card-list *ngIf="weatherData" [weatherData]="weatherData"></app-weather-card-list>
+<!--<unit-selector></unit-selector>-->
+<search (onQueryEntered)="fetchWeatherData($event)"></search>
+
+<weather-card-list *ngIf="weatherData" [weatherData]="weatherData"></weather-card-list>

@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Weather} from './weather-card/weather.model';
-import {Http, Response} from '@angular/http';
+import {WeatherService} from './weather-card/weather.service';
 
 @Component({
   selector: 'app-root',
@@ -10,18 +10,17 @@ import {Http, Response} from '@angular/http';
 export class AppComponent {
   weatherData: Weather[];
 
-  constructor(private http: Http) {
+  selectedCity: string;
+
+  selectedUnit: string;
+
+  constructor(private weatherService: WeatherService) {
 
   }
 
-  fetchWeatherData(city: HTMLInputElement): boolean {
-    console.log(this.getGeoCodeForAddress(city.value));
-
-
-    return false;
-  }
-
-  getGeoCodeForAddress(address: string) {
-    return this.http.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}`);
+  fetchWeatherData(city) {
+    this.weatherService.getWeatherData(city).subscribe((data: Weather[]) => {
+      this.weatherData = data;
+    });
   }
 }
