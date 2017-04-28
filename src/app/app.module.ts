@@ -9,13 +9,15 @@ import { WeatherCardComponent } from './weather-card/weather-card.component';
 import { WeatherCardListComponent } from './weather-card-list/weather-card-list.component';
 import { SearchComponent } from './search/search.component';
 import { WeatherService } from './weather-card/weather.service';
+import { UnitSwitcherComponent } from './unit-switcher/unit-switcher.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WeatherCardComponent,
     WeatherCardListComponent,
-    SearchComponent
+    SearchComponent,
+    UnitSwitcherComponent
   ],
   imports: [
     BrowserModule,

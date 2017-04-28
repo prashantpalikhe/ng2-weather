@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {Weather} from './weather-card/weather.model';
 import {WeatherService} from './weather-card/weather.service';
+import {Unit} from "./unit-switcher/unit.model";
 
 @Component({
   selector: 'app-root',
@@ -10,16 +11,33 @@ import {WeatherService} from './weather-card/weather.service';
 export class AppComponent {
   weatherData: Weather[];
 
-  selectedCity: string;
+  private address: string;
 
-  selectedUnit: string;
+  private unit: Unit;
+
+  private units: Unit[] = [
+    new Unit('C', 'uk'),
+    new Unit('F', 'us')
+  ];
 
   constructor(private weatherService: WeatherService) {
 
   }
 
-  fetchWeatherData(city) {
-    this.weatherService.getWeatherData(city).subscribe((data: Weather[]) => {
+  setUnit(unit: Unit) {
+    this.unit = unit;
+
+    this.fetchWeatherData();
+  }
+
+  setAddress(address: string) {
+    this.address = address;
+
+    this.fetchWeatherData();
+  }
+
+  fetchWeatherData() {
+    this.weatherService.getWeatherData(this.address, this.unit || this.units[0]).subscribe((data: Weather[]) => {
       this.weatherData = data;
     });
   }
