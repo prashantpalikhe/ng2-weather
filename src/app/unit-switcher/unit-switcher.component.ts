@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, HostBinding, Input, Output} from '@angular/core';
 import {Unit} from "./unit.model";
 
 @Component({
@@ -7,6 +7,8 @@ import {Unit} from "./unit.model";
   styleUrls: ['./unit-switcher.component.css']
 })
 export class UnitSwitcherComponent {
+
+  @HostBinding('attr.class') cssClass = 'unit-switcher';
 
   @Input() units: Unit[];
 

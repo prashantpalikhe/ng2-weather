@@ -1,0 +1,14 @@
+:host {
+  align-self: flex-end;
+}
+
+button {
+  appearance: none;
+  border: none;
+  outline: none;
+  margin-left: 5px;
+}
+
+button.selected {
+  font-weight: bold;
+}

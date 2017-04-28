@@ -1,5 +1,5 @@
 import {Weather} from '../weather-card/weather.model';
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, HostBinding, Input, OnInit} from "@angular/core";
 
 @Component({
   selector: 'weather-card-list',
@@ -7,6 +7,8 @@ import {Component, Input, OnInit} from "@angular/core";
   styleUrls: ['./weather-card-list.component.css']
 })
 export class WeatherCardListComponent implements OnInit {
+
+  @HostBinding('attr.class') cssClass = 'weather-card-list';
 
   @Input() weatherData: Weather[];
 
