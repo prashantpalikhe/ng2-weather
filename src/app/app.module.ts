@@ -10,6 +10,7 @@ import { WeatherCardListComponent } from './weather-card-list/weather-card-list.
 import { SearchComponent } from './search/search.component';
 import { WeatherService } from './weather-card/weather.service';
 import { UnitSwitcherComponent } from './unit-switcher/unit-switcher.component';
+import { WeatherIconComponent } from './weather-icon/weather-icon.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { UnitSwitcherComponent } from './unit-switcher/unit-switcher.component';
     WeatherCardComponent,
     WeatherCardListComponent,
     SearchComponent,
-    UnitSwitcherComponent
+    UnitSwitcherComponent,
+    WeatherIconComponent
   ],
   imports: [
     BrowserModule,

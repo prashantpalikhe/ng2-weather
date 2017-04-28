@@ -1,3 +1,5 @@
 <p>{{ weather.max }}</p>
 <p>{{ weather.min }}</p>
 <p>{{ weather.time * 1000| date }}</p>
+
+<weather-icon [name]="weather.icon"></weather-icon>
