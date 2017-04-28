@@ -1,4 +1,4 @@
-import {Weather} from './weather.model';
+import {Daily} from './daily.model';
 
 export interface IWeatherService {
   getWeatherData(address: string);

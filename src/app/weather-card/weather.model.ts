@@ -1,4 +1,6 @@
+import {Current} from './current.model';
+import {Daily} from './daily.model';
+
 export class Weather {
-  constructor(public max: number, public min: number, public time: number, public icon: string) {
-  }
+  public constructor(public current: Current, public forecast: Daily[]) {}
 }

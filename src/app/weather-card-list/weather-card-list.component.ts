@@ -1,4 +1,4 @@
-import {Weather} from '../weather-card/weather.model';
+import {Daily} from '../weather-card/daily.model';
 import {Component, HostBinding, Input, OnInit} from "@angular/core";
 
 @Component({
@@ -10,7 +10,7 @@ export class WeatherCardListComponent implements OnInit {
 
   @HostBinding('attr.class') cssClass = 'weather-card-list';
 
-  @Input() weatherData: Weather[];
+  @Input() weatherData: Daily[];
 
   constructor() {
   }
