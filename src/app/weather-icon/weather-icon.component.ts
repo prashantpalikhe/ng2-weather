@@ -10,6 +10,7 @@ const Icon = skycons(window);
 })
 export class WeatherIconComponent implements OnInit, OnDestroy {
 
+  @Input() size: number;
   @Input() name: string;
 
   private icon: any;

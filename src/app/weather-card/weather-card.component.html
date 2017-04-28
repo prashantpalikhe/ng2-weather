@@ -1,5 +1,5 @@
 <p>{{ weather.max | number:'1.0-0'}}</p>
 <p>{{ weather.min | number:'1.0-0' }}</p>
+<weather-icon [name]="weather.icon" [size]="32"></weather-icon>
 <p>{{ weather.time * 1000| date:"EEEE" }}</p>
 
-<weather-icon [name]="weather.icon"></weather-icon>

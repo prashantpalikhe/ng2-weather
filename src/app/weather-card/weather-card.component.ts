@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, HostBinding, Input} from '@angular/core';
 import { Daily } from './daily.model';
 
 @Component({
@@ -7,6 +7,8 @@ import { Daily } from './daily.model';
   styleUrls: ['./weather-card.component.css']
 })
 export class WeatherCardComponent {
+  @HostBinding('attr.class') cssClass = 'weather-card';
+
   @Input() weather: Daily;
 
   constructor() {
