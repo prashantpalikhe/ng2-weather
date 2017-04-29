@@ -37,7 +37,7 @@ export class AppComponent {
   }
 
   fetchWeatherData() {
-    this.weatherService.getWeatherData(this.address, this.unit || this.units[0]).subscribe((data: Weather) => {
+    this.weatherService.getWeatherByAddress(this.address, this.unit || this.units[0]).subscribe((data: Weather) => {
       this.weatherData = data;
     });
   }

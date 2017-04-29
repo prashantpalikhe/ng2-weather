@@ -19,48 +19,52 @@ export class WeatherService {
               @Inject('GEOCODE_API_URL') private geocodeApiUrl: string) {
   }
 
-  getWeatherData(address: string, unit: Unit): Observable<Weather> {
+  getWeatherByLocation(location: Location, unit: Unit): Observable<Weather> {
+    return this.jsonp.get(`${this.weatherApiUrl}/${location.latitude},${location.longitude}?units=${unit.value}&exclude=minutely,hourly,alerts,flags&callback=JSONP_CALLBACK`)
+      .map((res: Response) => {
+        const result = res.json();
+
+        console.log(result);
+
+        const today = result.daily.data.shift();
+
+        const forecast = result.daily.data.map(({temperatureMax, temperatureMin, time, icon}) => {
+          return new Daily(
+            temperatureMax,
+            temperatureMin,
+            time,
+            icon
+          );
+        });
+
+        const current = new Current(
+          result.currently.temperature,
+          result.currently.apparentTemperature,
+          result.currently.summary,
+          result.currently.icon,
+          result.currently.precipIntensity,
+          result.currently.precipProbability,
+          result.currently.dewPoint,
+          result.currently.humidity,
+          result.currently.windSpeed,
+          result.currently.windBearing,
+          result.currently.cloudCover,
+          result.currently.pressure,
+          (result.currently.time > today.sunsetTime || result.currently.time < today.sunriseTime) ? 'night' : 'day'
+        );
+
+        return new Weather(
+          location,
+          current,
+          forecast
+        );
+      });
+  }
+
+  getWeatherByAddress(address: string, unit: Unit): Observable<Weather> {
     return this.getLocationForAddress(address)
       .flatMap((location: Location) => {
-        return this.jsonp.get(`${this.weatherApiUrl}/${location.latitude},${location.longitude}?units=${unit.value}&exclude=minutely,hourly,alerts,flags&callback=JSONP_CALLBACK`)
-          .map((res: Response) => {
-            const result = res.json();
-
-            console.log(result);
-
-            const today = result.daily.data.shift();
-
-            const forecast = result.daily.data.map(({temperatureMax, temperatureMin, time, icon}) => {
-              return new Daily(
-                temperatureMax,
-                temperatureMin,
-                time,
-                icon
-              );
-            });
-
-            const current = new Current(
-              result.currently.temperature,
-              result.currently.apparentTemperature,
-              result.currently.summary,
-              result.currently.icon,
-              result.currently.precipIntensity,
-              result.currently.precipProbability,
-              result.currently.dewPoint,
-              result.currently.humidity,
-              result.currently.windSpeed,
-              result.currently.windBearing,
-              result.currently.cloudCover,
-              result.currently.pressure,
-              (result.currently.time > today.sunsetTime || result.currently.time < today.sunriseTime) ? 'night' : 'day'
-            );
-
-            return new Weather(
-              location,
-              current,
-              forecast
-            );
-          });
+        return this.getWeatherByLocation(location, unit);
       });
   }
 
