@@ -28,18 +28,16 @@ export class WeatherService {
 
             console.log(result);
 
-            const forecast = result.daily.data.map(({temperatureMax, temperatureMin, time, icon, sunriseTime, sunsetTime}) => {
+            const today = result.daily.data.shift();
+
+            const forecast = result.daily.data.map(({temperatureMax, temperatureMin, time, icon}) => {
               return new Daily(
                 temperatureMax,
                 temperatureMin,
                 time,
-                icon,
-                sunriseTime,
-                sunsetTime
+                icon
               );
             });
-
-            const today = forecast[0];
 
             const current = new Current(
               result.currently.temperature,

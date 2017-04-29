@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, HostBinding, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'search',
@@ -6,6 +6,8 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
+
+  @HostBinding('attr.class') cssClass = 'search';
 
   @Output() onQueryEntered: EventEmitter<string>;
 

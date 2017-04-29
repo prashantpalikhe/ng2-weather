@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, OnDestroy} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, OnDestroy, HostBinding} from '@angular/core';
 import skycons from 'skycons';
 
 const Icon = skycons(window);
@@ -9,6 +9,8 @@ const Icon = skycons(window);
   styleUrls: ['./weather-icon.component.css']
 })
 export class WeatherIconComponent implements OnInit, OnDestroy {
+
+  @HostBinding('attr.class') cssClass = 'weather-icon';
 
   @Input() size: number;
   @Input() name: string;

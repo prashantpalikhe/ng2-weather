@@ -1,7 +1,7 @@
 <div class="app" [ngClass]="weatherData?.current.period">
   <div class="app-container">
-    <unit-switcher [units]="this.units" (onUnitChanged)="setUnit($event)" *ngIf="weatherData"></unit-switcher>
     <search (onQueryEntered)="setAddress($event)"></search>
+    <unit-switcher [units]="this.units" (onUnitChanged)="setUnit($event)" *ngIf="weatherData"></unit-switcher>
 
     <div *ngIf="weatherData">
       <current-weather [weather]="weatherData.current"></current-weather>
