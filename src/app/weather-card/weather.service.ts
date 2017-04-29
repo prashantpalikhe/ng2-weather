@@ -4,11 +4,11 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
-import {Coords} from '../coords.model';
+import {Location} from '../location.model';
 import {Daily} from './daily.model';
 import {Current} from './current.model';
-import {Unit} from "../unit-switcher/unit.model";
-import {Weather} from "./weather.model";
+import {Unit} from '../unit-switcher/unit.model';
+import {Weather} from './weather.model';
 
 @Injectable()
 export class WeatherService {
@@ -20,9 +20,9 @@ export class WeatherService {
   }
 
   getWeatherData(address: string, unit: Unit): Observable<Weather> {
-    return this.getCoordsForAddress(address)
-      .flatMap((coords: Coords) => {
-        return this.jsonp.get(`${this.weatherApiUrl}/${coords.latitude},${coords.longitude}?units=${unit.value}&exclude=minutely,hourly,alerts,flags&callback=JSONP_CALLBACK`)
+    return this.getLocationForAddress(address)
+      .flatMap((location: Location) => {
+        return this.jsonp.get(`${this.weatherApiUrl}/${location.latitude},${location.longitude}?units=${unit.value}&exclude=minutely,hourly,alerts,flags&callback=JSONP_CALLBACK`)
           .map((res: Response) => {
             const result = res.json();
 
@@ -56,7 +56,7 @@ export class WeatherService {
             );
 
             return new Weather(
-              coords,
+              location,
               current,
               forecast
             );
@@ -64,13 +64,13 @@ export class WeatherService {
       });
   }
 
-  getCoordsForAddress(address: string): Observable<Coords> {
+  getLocationForAddress(address: string): Observable<Location> {
     return this.http.get(`${this.geocodeApiUrl}?address=${address}`)
       .map((response: Response) => {
         const result = response.json().results[0];
         const {lat, lng} = result.geometry.location;
 
-        return new Coords(lat, lng);
+        return new Location(lat, lng);
       });
   }
 }

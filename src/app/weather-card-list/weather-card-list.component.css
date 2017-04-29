@@ -1,4 +1,11 @@
 :host {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
+}
+
+@media (min-width: 720px) {
+  :host {
+    flex-direction: row;
+  }
 }
