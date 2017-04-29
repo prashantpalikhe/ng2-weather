@@ -14,23 +14,14 @@ export class UnitSwitcherComponent {
 
   @Output() onUnitChanged: EventEmitter<Unit>;
 
-  private currentUnit: Unit;
-
   constructor() {
     this.onUnitChanged = new EventEmitter();
   }
 
   selectUnit(unit: Unit): void {
-    this.currentUnit = unit;
+    this.units.forEach(_unit => _unit.selected = false);
+    unit.selected = true;
+
     this.onUnitChanged.emit(unit);
   }
-
-  isSelected(unit: Unit): boolean {
-    if (!unit || !this.currentUnit) {
-      return false;
-    }
-
-    return unit.value === this.currentUnit.value;
-  }
-
 }

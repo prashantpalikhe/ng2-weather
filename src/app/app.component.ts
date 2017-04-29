@@ -16,8 +16,8 @@ export class AppComponent {
   private unit: Unit;
 
   private units: Unit[] = [
-    new Unit('C', 'uk'),
-    new Unit('F', 'us')
+    new Unit('C', 'uk', true),
+    new Unit('F', 'us', false)
   ];
 
   constructor(private weatherService: WeatherService) {
