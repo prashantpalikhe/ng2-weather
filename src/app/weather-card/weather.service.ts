@@ -25,6 +25,22 @@ export class WeatherService {
         return this.jsonp.get(`${this.weatherApiUrl}/${coords.latitude},${coords.longitude}?units=${unit.value}&exclude=minutely,hourly,alerts,flags&callback=JSONP_CALLBACK`)
           .map((res: Response) => {
             const result = res.json();
+
+            console.log(result);
+
+            const forecast = result.daily.data.map(({temperatureMax, temperatureMin, time, icon, sunriseTime, sunsetTime}) => {
+              return new Daily(
+                temperatureMax,
+                temperatureMin,
+                time,
+                icon,
+                sunriseTime,
+                sunsetTime
+              );
+            });
+
+            const today = forecast[0];
+
             const current = new Current(
               result.currently.temperature,
               result.currently.apparentTemperature,
@@ -37,13 +53,12 @@ export class WeatherService {
               result.currently.windSpeed,
               result.currently.windBearing,
               result.currently.cloudCover,
-              result.currently.pressure
+              result.currently.pressure,
+              (result.currently.time > today.sunsetTime || result.currently.time < today.sunriseTime) ? 'night' : 'day'
             );
-            const forecast = result.daily.data.map(({temperatureMax, temperatureMin, time, icon}) => {
-              return new Daily(temperatureMax, temperatureMin, time, icon);
-            });
 
             return new Weather(
+              coords,
               current,
               forecast
             );

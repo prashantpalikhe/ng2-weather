@@ -10,6 +10,7 @@ export class Current {
               public windSpeed: number,
               public windBearing: number,
               public cloudCover: number,
-              public pressure: number) {
+              public pressure: number,
+              public period: string) {
   }
 }
