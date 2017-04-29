@@ -1,5 +1,5 @@
 import {Component, HostBinding, Input, OnInit} from '@angular/core';
-import {Current} from "../weather-card/current.model";
+import {Current} from '../weather-card/current.model';
 
 @Component({
   selector: 'current-weather',

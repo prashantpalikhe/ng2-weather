@@ -1,5 +1,5 @@
 import {Daily} from '../weather-card/daily.model';
-import {Component, HostBinding, Input, OnInit} from "@angular/core";
+import {Component, HostBinding, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'weather-card-list',

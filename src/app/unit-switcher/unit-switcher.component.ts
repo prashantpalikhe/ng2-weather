@@ -1,5 +1,5 @@
 import {Component, EventEmitter, HostBinding, Input, Output} from '@angular/core';
-import {Unit} from "./unit.model";
+import {Unit} from './unit.model';
 
 @Component({
   selector: 'unit-switcher',

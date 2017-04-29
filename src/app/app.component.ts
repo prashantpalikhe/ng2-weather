@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {WeatherService} from './weather-card/weather.service';
-import {Unit} from "./unit-switcher/unit.model";
-import {Weather} from "./weather-card/weather.model";
+import {Unit} from './unit-switcher/unit.model';
+import {Weather} from './weather-card/weather.model';
 
 @Component({
   selector: 'app-root',
