@@ -2,6 +2,9 @@
   <unit-switcher [units]="this.units" (onUnitChanged)="setUnit($event)" *ngIf="weatherData"></unit-switcher>
   <search (onQueryEntered)="setAddress($event)"></search>
 
-  <weather-card-list *ngIf="weatherData" [weatherData]="weatherData.forecast"></weather-card-list>
+  <div *ngIf="weatherData">
+    <current-weather [weather]="weatherData.current"></current-weather>
+    <weather-card-list [weatherData]="weatherData.forecast"></weather-card-list>
+  </div>
 </div>
 
