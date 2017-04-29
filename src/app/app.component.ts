@@ -9,7 +9,7 @@ import {Weather} from "./weather-card/weather.model";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  weatherData: Weather;
+  weather: Weather;
 
   private address: string;
 
@@ -38,7 +38,7 @@ export class AppComponent {
 
   fetchWeatherData() {
     this.weatherService.getWeatherByAddress(this.address, this.unit || this.units[0]).subscribe((data: Weather) => {
-      this.weatherData = data;
+      this.weather = data;
     });
   }
 }

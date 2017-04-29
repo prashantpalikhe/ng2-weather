@@ -1,11 +1,15 @@
-<div class="app" [ngClass]="weatherData?.current.period">
+<div class="app" [ngClass]="weather?.current.period">
   <div class="app-container">
     <search (onQueryEntered)="setAddress($event)"></search>
-    <unit-switcher [units]="this.units" (onUnitChanged)="setUnit($event)" *ngIf="weatherData"></unit-switcher>
 
-    <div *ngIf="weatherData">
-      <current-weather [weather]="weatherData.current"></current-weather>
-      <weather-card-list [weatherData]="weatherData.forecast"></weather-card-list>
+    <div *ngIf="weather">
+      <div class="app-meta">
+        <p>{{ weather.location.name }}</p>
+        <unit-switcher [units]="this.units" (onUnitChanged)="setUnit($event)" *ngIf="weather"></unit-switcher>
+      </div>
+
+      <current-weather [weather]="weather.current"></current-weather>
+      <weather-card-list [weatherData]="weather.forecast"></weather-card-list>
     </div>
   </div>
 </div>
