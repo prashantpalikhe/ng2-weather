@@ -1,0 +1,10 @@
+:host {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.current-weather__temperature {
+  font-size: 200px;
+  line-height: 300px;
+}
