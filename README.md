@@ -1,6 +1,8 @@
 # Ng2Weather
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
+Simple weather app powered by Angular and forecast.io.
+
+<img src="https://i.imgur.com/yGh6x8J.gif" alt="Demo" title="ng2-weather" width="717px" />
 
 ## Development server
 
