@@ -28,12 +28,13 @@ export class WeatherService {
 
         const today = result.daily.data.shift();
 
-        const forecast = result.daily.data.map(({temperatureMax, temperatureMin, time, icon}) => {
+        const forecast = result.daily.data.map(({temperatureMax, temperatureMin, time, icon, summary}) => {
           return new Daily(
             temperatureMax,
             temperatureMin,
             time,
-            icon
+            icon,
+            summary
           );
         });
 

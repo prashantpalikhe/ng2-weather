@@ -1,9 +1,11 @@
-<p>
-  <strong>H</strong>{{ weather.max | number:'1.0-0'}}
-  <strong>L</strong>{{ weather.min | number:'1.0-0' }}
-</p>
-<weather-icon [name]="weather.icon" [size]="32"></weather-icon>
-<p>{{ weather.time * 1000| date:"EEE" }}</p>
+<div title="{{weather.summary}}">
+  <p>
+    <strong>H</strong>{{ weather.max | number:'1.0-0'}}
+    <strong>L</strong>{{ weather.min | number:'1.0-0' }}
+  </p>
+  <weather-icon [name]="weather.icon" [size]="32"></weather-icon>
+  <p>{{ weather.time * 1000| date:"EEE" }}</p>
+</div>
 
 
 
