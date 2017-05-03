@@ -12,3 +12,11 @@
 :host *:not(:last-child) {
   margin-bottom: 10px;
 }
+
+:host:first-child {
+  border-radius: 5px 0 0 5px;
+}
+
+:host:last-child {
+  border-radius: 0 5px 5px 0;
+}
