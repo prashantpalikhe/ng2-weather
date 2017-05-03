@@ -19,27 +19,7 @@ export class WeatherService {
               @Inject('GEOCODE_API_URL') private geocodeApiUrl: string) {
   }
 
-  getWeatherByAddress(address: string, unit: Unit): Observable<Weather> {
-    return this.getLocationForAddress(address)
-      .flatMap((location: Location) => {
-        return this.getWeatherByLocation(location, unit);
-      });
-  }
-
-  getLocationForAddress(address: string): Observable<Location> {
-    return this.http.get(`${this.geocodeApiUrl}?address=${address}`)
-      .map((response: Response) => {
-        const result = response.json().results[0];
-
-        console.log(result);
-
-        const name = result.formatted_address;
-        const {lat, lng} = result.geometry.location;
-        return new Location(name, lat, lng);
-      });
-  }
-
-  getWeatherByLocation(location: Location, unit: Unit): Observable<Weather> {
+  getWeather(location: Location, unit: Unit): Observable<Weather> {
     return this.jsonp.get(`${this.weatherApiUrl}/${location.latitude},${location.longitude}?units=${unit.value}&exclude=minutely,hourly,alerts,flags&callback=JSONP_CALLBACK`)
       .map((res: Response) => {
         const result = res.json();
@@ -77,5 +57,27 @@ export class WeatherService {
           forecast
         );
       });
+  }
+
+  getLocationForAddress(address: string): Observable<Location> {
+    return this.http.get(`${this.geocodeApiUrl}?address=${address}`)
+      .map((response: Response) => {
+        const result = response.json().results[0];
+
+        console.log(result);
+
+        const name = result.formatted_address;
+        const {lat, lng} = result.geometry.location;
+
+        return new Location(lat, lng, name);
+      });
+  }
+
+  getCurrentLocation(): Promise<Location> {
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(position => {
+        resolve(new Location(position.coords.latitude, position.coords.longitude));
+      }, reject);
+    });
   }
 }
