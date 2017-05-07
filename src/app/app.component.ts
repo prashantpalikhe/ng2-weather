@@ -23,7 +23,7 @@ export class AppComponent {
   constructor(private weatherService: WeatherService) {
     this.unit = this.units[0];
 
-    this.weatherService.getCurrentLocation().then((location: Location) => {
+    this.weatherService.getCurrentLocation().subscribe((location: Location) => {
       this.location = location;
       this.getWeather();
     });

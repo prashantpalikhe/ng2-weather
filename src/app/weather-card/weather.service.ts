@@ -14,9 +14,10 @@ import {Weather} from './weather.model';
 export class WeatherService {
 
   constructor(private http: Http,
-              private jsonp: Jsonp, @Inject('WEATHER_API_URL')
-              private weatherApiUrl: string,
-              @Inject('GEOCODE_API_URL') private geocodeApiUrl: string) {
+              private jsonp: Jsonp,
+              @Inject('WEATHER_API_URL') private weatherApiUrl: string,
+              @Inject('GEOCODE_API_URL') private geocodeApiUrl: string,
+              @Inject('IP_API_URL') private ipApiUrl: string) {
   }
 
   getWeather(location: Location, unit: Unit): Observable<Weather> {
@@ -74,11 +75,12 @@ export class WeatherService {
       });
   }
 
-  getCurrentLocation(): Promise<Location> {
-    return new Promise((resolve, reject) => {
-      navigator.geolocation.getCurrentPosition(position => {
-        resolve(new Location(position.coords.latitude, position.coords.longitude));
-      }, reject);
-    });
+  getCurrentLocation(): Observable<Location> {
+    return this.http.get(this.ipApiUrl)
+      .map((response: Response) => {
+        const result = response.json();
+
+        return new Location(result.lat, result.lon, `${result.city}, ${result.country}`);
+      });
   }
 }
