@@ -2,8 +2,6 @@
 
 Simple weather app powered by Angular and forecast.io.
 
-<img src="https://i.imgur.com/yGh6x8J.gif" alt="Demo" title="ng2-weather" width="717px" />
-
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
