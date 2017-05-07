@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, OnDestroy, HostBinding} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, OnDestroy, HostBinding, OnChanges, SimpleChanges} from '@angular/core';
 import skycons from 'skycons';
 
 const Icon = skycons(window);
@@ -8,7 +8,7 @@ const Icon = skycons(window);
   templateUrl: './weather-icon.component.html',
   styleUrls: ['./weather-icon.component.css']
 })
-export class WeatherIconComponent implements OnInit, OnDestroy {
+export class WeatherIconComponent implements OnInit, OnChanges, OnDestroy {
 
   @HostBinding('attr.class') cssClass = 'weather-icon';
 
@@ -20,13 +20,23 @@ export class WeatherIconComponent implements OnInit, OnDestroy {
   constructor(private element: ElementRef) { }
 
   ngOnInit() {
-    this.icon = new Icon({color: 'white'});
+    this.setIcon(this.name);
+  }
 
-    this.icon.set(this.element.nativeElement.querySelector('canvas'), this.name);
-    this.icon.play();
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.name) {
+      this.setIcon(changes.name.currentValue);
+    }
   }
 
   ngOnDestroy() {
     this.icon.remove(this.element);
+  }
+
+  setIcon(name: string) {
+    this.icon = new Icon({color: 'white'});
+
+    this.icon.set(this.element.nativeElement.querySelector('canvas'), name);
+    this.icon.play();
   }
 }
