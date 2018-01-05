@@ -1,27 +1,27 @@
-import {Component, EventEmitter, HostBinding, Input, Output} from '@angular/core';
-import {Unit} from './unit.model';
+import {Component, EventEmitter, HostBinding, Output} from '@angular/core';
+import {store, IAppState} from '../store';
+import {selectUnit} from '../store';
+import {Unit} from '../models/unit';
+import {NgRedux, select} from 'ng2-redux';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
-  selector: 'unit-switcher',
+  selector: 'app-unit-switcher',
   templateUrl: './unit-switcher.component.html',
   styleUrls: ['./unit-switcher.component.css']
 })
 export class UnitSwitcherComponent {
-
   @HostBinding('attr.class') cssClass = 'unit-switcher';
-
-  @Input() units: Unit[];
-
   @Output() onUnitChanged: EventEmitter<Unit>;
 
-  constructor() {
+  @select('units') units$: Observable<Unit>;
+
+  constructor(private ngRedux: NgRedux<IAppState>) {
     this.onUnitChanged = new EventEmitter();
   }
 
   selectUnit(unit: Unit): void {
-    this.units.forEach(_unit => _unit.selected = false);
-    unit.selected = true;
-
+    store.dispatch(selectUnit(unit));
     this.onUnitChanged.emit(unit);
   }
 }

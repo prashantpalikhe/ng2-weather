@@ -1,17 +1,20 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { JsonpModule } from '@angular/http';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {HttpModule} from '@angular/http';
+import {JsonpModule} from '@angular/http';
 
-import { AppComponent } from './app.component';
-import { WeatherCardComponent } from './weather-card/weather-card.component';
-import { WeatherCardListComponent } from './weather-card-list/weather-card-list.component';
-import { SearchComponent } from './search/search.component';
-import { WeatherService } from './weather-card/weather.service';
-import { UnitSwitcherComponent } from './unit-switcher/unit-switcher.component';
-import { WeatherIconComponent } from './weather-icon/weather-icon.component';
-import { CurrentWeatherComponent } from './current-weather/current-weather.component';
+import {NgReduxModule, NgRedux} from 'ng2-redux';
+import {store, IAppState} from './store';
+
+import {AppComponent} from './app.component';
+import {WeatherCardComponent} from './weather-card/weather-card.component';
+import {WeatherCardListComponent} from './weather-card-list/weather-card-list.component';
+import {SearchComponent} from './search/search.component';
+import {WeatherService} from './weather-card/weather.service';
+import {UnitSwitcherComponent} from './unit-switcher/unit-switcher.component';
+import {WeatherIconComponent} from './weather-icon/weather-icon.component';
+import {CurrentWeatherComponent} from './current-weather/current-weather.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,8 @@ import { CurrentWeatherComponent } from './current-weather/current-weather.compo
     BrowserModule,
     FormsModule,
     HttpModule,
-    JsonpModule
+    JsonpModule,
+    NgReduxModule
   ],
   providers: [
     WeatherService,
@@ -37,4 +41,8 @@ import { CurrentWeatherComponent } from './current-weather/current-weather.compo
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(ngRedux: NgRedux<IAppState>) {
+    ngRedux.provideStore(store);
+  }
+}

@@ -1,1 +1,1 @@
-<button (click)="selectUnit(unit)" [ngClass]="{selected: unit.selected}" *ngFor="let unit of units">{{ unit.display }}</button>
+<button (click)="selectUnit(unit)" [ngClass]="{selected: unit.selected}" *ngFor="let unit of units$ | async">{{ unit.display }}</button>

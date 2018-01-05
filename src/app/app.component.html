@@ -5,7 +5,7 @@
     <div *ngIf="weather">
       <div class="app-meta">
         <p>{{ weather.location.name }}</p>
-        <unit-switcher [units]="this.units" (onUnitChanged)="onUnitChanged($event)" *ngIf="weather"></unit-switcher>
+        <app-unit-switcher (onUnitChanged)="onUnitChanged($event)"></app-unit-switcher>
       </div>
 
       <current-weather [weather]="weather.current"></current-weather>

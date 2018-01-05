@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {WeatherService} from './weather-card/weather.service';
-import {Unit} from './unit-switcher/unit.model';
 import {Weather} from './weather-card/weather.model';
-import {Location} from "./location.model";
+import {Location} from './location.model';
+import {store} from './store';
 
 @Component({
   selector: 'app-root',
@@ -12,26 +12,16 @@ import {Location} from "./location.model";
 export class AppComponent {
   weather: Weather;
 
-  private unit: Unit;
   private location: Location;
 
-  private units: Unit[] = [
-    new Unit('C', 'uk', true),
-    new Unit('F', 'us', false)
-  ];
-
   constructor(private weatherService: WeatherService) {
-    this.unit = this.units[0];
-
     this.weatherService.getCurrentLocation().subscribe((location: Location) => {
       this.location = location;
       this.getWeather();
     });
   }
 
-  onUnitChanged(unit: Unit) {
-    this.unit = unit;
-
+  onUnitChanged() {
     this.getWeather();
   }
 
@@ -44,9 +34,13 @@ export class AppComponent {
       });
   }
 
+  getSelectedUnit() {
+    return store.getState().units.find(unit => unit.selected);
+  }
+
   getWeather() {
     if (this.location) {
-      this.weatherService.getWeather(this.location, this.unit).subscribe((data: Weather) => {
+      this.weatherService.getWeather(this.location, this.getSelectedUnit()).subscribe((data: Weather) => {
         this.weather = data;
       });
     }
