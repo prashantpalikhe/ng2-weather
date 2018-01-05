@@ -12,9 +12,11 @@ import {WeatherCardComponent} from './weather-card/weather-card.component';
 import {WeatherCardListComponent} from './weather-card-list/weather-card-list.component';
 import {SearchComponent} from './search/search.component';
 import {WeatherService} from './weather-card/weather.service';
-import {UnitSwitcherComponent} from './unit-switcher/unit-switcher.component';
+import {UnitSwitcherComponent} from './unit/unit-switcher.component';
 import {WeatherIconComponent} from './weather-icon/weather-icon.component';
 import {CurrentWeatherComponent} from './current-weather/current-weather.component';
+import {UnitActions} from './unit/unit.actions';
+
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import {CurrentWeatherComponent} from './current-weather/current-weather.compone
     NgReduxModule
   ],
   providers: [
+    UnitActions,
     WeatherService,
     {provide: 'WEATHER_API_URL', useValue: 'https://api.forecast.io/forecast/4891dee8e0ca9cf8fdb7ad6dd07fef9f'},
     {provide: 'GEOCODE_API_URL', useValue: 'https://maps.googleapis.com/maps/api/geocode/json'},

@@ -7,8 +7,8 @@ import 'rxjs/add/operator/mergeMap';
 import {Location} from '../location.model';
 import {Daily} from './daily.model';
 import {Current} from './current.model';
-import {Unit} from '../unit-switcher/unit.model';
 import {Weather} from './weather.model';
+import {Unit} from "../unit/unit";
 
 @Injectable()
 export class WeatherService {
