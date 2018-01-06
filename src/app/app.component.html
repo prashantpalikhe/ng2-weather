@@ -1,10 +1,10 @@
 <div class="app" [ngClass]="weather?.current.period">
   <div class="app-container">
-    <search (onQueryEntered)="onAddressEntered($event)"></search>
+    <app-search (onQueryEntered)="onAddressEntered($event)"></app-search>
 
     <div *ngIf="weather">
       <div class="app-meta">
-        <p>{{ weather.location.name }}</p>
+        <p>{{ (location$ | async)?.name }}</p>
         <app-unit-switcher (onUnitChanged)="onUnitChanged($event)"></app-unit-switcher>
       </div>
 
