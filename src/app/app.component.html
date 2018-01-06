@@ -1,15 +1,15 @@
-<div class="app" [ngClass]="weather?.current.period">
+<div class="app" [ngClass]="(weather$ | async)?.current.period">
   <div class="app-container">
-    <app-search (onQueryEntered)="onAddressEntered($event)"></app-search>
+    <app-search></app-search>
 
-    <div *ngIf="weather">
+    <div *ngIf="weather$ | async">
       <div class="app-meta">
         <p>{{ (location$ | async)?.name }}</p>
-        <app-unit-switcher (onUnitChanged)="onUnitChanged($event)"></app-unit-switcher>
+        <app-unit-switcher></app-unit-switcher>
       </div>
 
-      <current-weather [weather]="weather.current"></current-weather>
-      <weather-card-list [weatherData]="weather.forecast"></weather-card-list>
+      <app-current-weather [weather]="(weather$ | async).current"></app-current-weather>
+      <app-weather-card-list [weatherData]="(weather$ | async).dailyForecast"></app-weather-card-list>
     </div>
   </div>
 </div>

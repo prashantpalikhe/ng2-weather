@@ -8,15 +8,16 @@ import {NgReduxModule, NgRedux} from 'ng2-redux';
 import {store, IAppState} from './store';
 
 import {AppComponent} from './app.component';
-import {WeatherCardComponent} from './weather-card/weather-card.component';
-import {WeatherCardListComponent} from './weather-card-list/weather-card-list.component';
+import {WeatherCardComponent} from './weather/components/weather-card/weather-card.component';
+import {WeatherCardListComponent} from './weather/components/weather-card-list/weather-card-list.component';
 import {SearchComponent} from './location/search.component';
-import {WeatherService} from './weather-card/weather.service';
+import {WeatherService} from './weather/weather.service';
 import {UnitSwitcherComponent} from './unit/unit-switcher.component';
-import {WeatherIconComponent} from './weather-icon/weather-icon.component';
-import {CurrentWeatherComponent} from './current-weather/current-weather.component';
+import {WeatherIconComponent} from './weather/components/weather-icon/weather-icon.component';
+import {CurrentWeatherComponent} from './weather/components/current-weather/current-weather.component';
 import {UnitActions} from './unit/unit.actions';
 import {LocationActions} from './location/location.actions';
+import {WeatherActions} from './weather/weather.actions';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import {LocationActions} from './location/location.actions';
     NgReduxModule
   ],
   providers: [
+    WeatherActions,
     LocationActions,
     UnitActions,
     WeatherService,

@@ -1,18 +1,14 @@
 import {Component, HostBinding, Input, OnInit} from '@angular/core';
-import {Current} from '../weather-card/current.model';
+import {CurrentWeather} from '../../weather';
 
 @Component({
-  selector: 'current-weather',
+  selector: 'app-current-weather',
   templateUrl: './current-weather.component.html',
   styleUrls: ['./current-weather.component.css']
 })
-export class CurrentWeatherComponent implements OnInit {
-  @Input() weather: Current;
+export class CurrentWeatherComponent {
+  @Input() weather: CurrentWeather;
   @HostBinding('attr.class') cssClass = 'current-weather';
 
   constructor() { }
-
-  ngOnInit() {
-  }
-
 }
