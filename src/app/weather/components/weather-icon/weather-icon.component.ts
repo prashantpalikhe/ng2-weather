@@ -4,7 +4,7 @@ import skycons from 'skycons';
 const Icon = skycons(window);
 
 @Component({
-  selector: 'weather-icon',
+  selector: 'app-weather-icon',
   templateUrl: './weather-icon.component.html',
   styleUrls: ['./weather-icon.component.css']
 })
